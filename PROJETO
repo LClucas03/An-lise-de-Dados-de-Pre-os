@@ -1,0 +1,63 @@
+# Importando as bibliotecas necessárias
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Dados fornecidos
+data = {
+    'Date': [
+        '2014-09-17', '2014-09-18', '2014-09-19', '2014-09-20', '2014-09-21', 
+        '2014-09-22', '2014-09-23', '2014-09-24', '2014-09-25', '2014-09-26',
+        '2014-09-27', '2014-09-28', '2014-09-29', '2014-09-30', '2014-10-01',
+        '2014-10-02', '2014-10-03', '2014-10-04', '2014-10-05'
+    ],
+    'Open': [
+        465.8640137, 456.8599854, 424.1029968, 394.6730042, 408.0849915,
+        399.1000061, 402.0920105, 435.7510071, 423.1560059, 411.4289856,
+        403.5559998, 399.4710083, 376.928009, 376.0880127, 387.427002,
+        383.9880066, 375.1809998, 359.8919983, 328.9159851
+    ],
+    'Close': [
+        457.3340149, 424.4400024, 394.79599, 408.9039917, 398.8210144,
+        402.1520081, 435.7909851, 423.2049866, 411.5740051, 404.4249878,
+        399.519989, 377.1809998, 375.4670105, 386.9440002, 383.6149902,
+        375.071991, 359.5119934, 328.8659973, 320.5100098
+    ],
+    'Volume': [
+        21056800, 34483200, 37919700, 36863600, 26580100, 
+        24127600, 45099500, 30627700, 26814400, 21460800, 
+        15029300, 23613300, 32497700, 34707300, 26229400,
+        21777700, 30901200, 47236500, 83308096
+    ]
+}
+
+# Criação do DataFrame
+df = pd.DataFrame(data)
+
+# Convertendo a coluna 'Date' para o formato datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Criando o gráfico
+plt.figure(figsize=(14, 8))
+
+# Gráfico de preços de Abertura e Fechamento
+plt.plot(df['Date'], df['Open'], label='Preço de Abertura', color='blue', marker='o')
+plt.plot(df['Date'], df['Close'], label='Preço de Fechamento', color='red', marker='x')
+
+# Personalizando o gráfico
+plt.xlabel('Data')
+plt.ylabel('Preço (USD)')
+plt.title('Variação de Preço de Abertura e Fechamento')
+plt.xticks(rotation=45)
+plt.legend()
+
+# Criando um eixo secundário para Volume
+ax2 = plt.gca().twinx()
+ax2.bar(df['Date'], df['Volume'], alpha=0.3, color='gray', label='Volume de Negociação')
+
+# Personalizando o eixo secundário
+ax2.set_ylabel('Volume de Negociação')
+
+plt.tight_layout()
+
+# Exibir o gráfico
+plt.show()
