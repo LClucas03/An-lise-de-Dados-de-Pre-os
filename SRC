@@ -1,0 +1,7 @@
+my_project/
+├── README.md
+├── .gitignore
+├── src/
+│   ├── data_analysis.py
+│   └── plot_generation.py
+└── requirements.txt
